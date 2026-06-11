@@ -1,5 +1,6 @@
 cadastros_alunos = []
 total_cont = []
+notas = []
 
 def total_alunos():
     for i in total_alunos:
@@ -23,6 +24,15 @@ def menu ():
             cadastro()
         elif op == 2:
             Lnotas ()
+        elif op == 3:
+
+        elif op == 4:
+
+        elif op == 5:
+            salvar_arquivo ()
+        else:
+            print("saindo ...")
+            break
 
     except ValueError:
         print("Erro! Digite apenas números. Tente novamente.")
@@ -54,15 +64,46 @@ def cadastro ():
 
 def Lnotas ():
     try:
+        nome = input("Nome do aluno: ")
+        for aluno in cadastros_alunos:
+            if aluno["nome"].lower() == nome.lower():
 
-        while True:
-            print(f"insira a nota do aluno(a): ")
-            not1 = float(input("digite a 1º nota: "))
-            not2 = float(input("digite a 2º nota: "))
-            not3 = float(input("digite a 3º nota: "))
-            not4 = float(input("digite a 4º nota: "))
+                not1 = float(input("digite a 1º nota: "))
+                not2 = float(input("digite a 2º nota: "))
+                not3 = float(input("digite a 3º nota: "))
+                not4 = float(input("digite a 4º nota: "))
+
+            media = (not1 + not2 + not3 + not4) / 4
+            notas.append(media)
+
+            aluno["notas"] = notas
+
+            print("Notas registradas!")
+            return
 
     except:
-        print("kfas")
+        print("Aluno não encontrado!")
+
+def salvar_arquivo():
+    try:
+        arquivo_chamado = open('C:/Users/vboxuser/Documents/cadastro_chamado.txt', 'w', encoding='utf-8')
+        
+        for aluno in cadastros_alunos:
+
+            linha = (
+                f"{aluno['nome']};"
+                f"{aluno['idade']};"
+                f"{aluno['turma']};"
+                f"{','.join(map(str, aluno['notas']))}\n")
+
+        arquivo_chamado.write(linha)
+
+        arquivo_chamado.close()
+        
+    except:
+        print("Erro ao salvar chamado!!!")
+        
+    finally:
+        print("Processo salvo com sucesso")
 
 menu ()
