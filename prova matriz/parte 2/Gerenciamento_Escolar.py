@@ -1,5 +1,5 @@
 cadastros_alunos = {}
-cont = 0
+notas = []
 
 def menu ():
     try:
@@ -17,7 +17,7 @@ def menu ():
         if op == 1:
             cadastro()
         elif op == 2:
-            Lnotas (cont)
+            Lnotas ()
 
     except ValueError:
         print("Erro! Digite apenas números. Tente novamente.")
@@ -25,36 +25,50 @@ def menu ():
 def cadastro ():
     try:
 
-        while cont:
+        while True:
 
             nome = input("digite o nome do aluno: ")
             idade = int(input("digite a idade do aluno: "))
             turma = input("digite a turma desse aluno: ")
-            cadastros_alunos[nome] = {"idade": idade},{"turma": turma}
+            cadastros_alunos[nome] = {"idade": idade,"turma": turma}
 
             op = input("Deseja cadastrar outro aluno? (s/n): ").lower()
-            cont = cont + 1
 
             if op == "n":
-                print ("cadastro realizado!")
                 print(cadastros_alunos)
-                print(f"quantidades de alunos cadastrados: {cont}")
+                print(f"Quantidade de alunos: {len(cadastros_alunos)}")
                 break
-                
+
     except ValueError:
         print("Valor inválido. Tente novamente.")
     finally:
         menu ()
 
-def Lnotas (cont):
+def Lnotas ():
     try:
+        if nome in cadastros_alunos:
+            nome = input("Nome do aluno: ")
 
-        while cont:
-            print(f"insira a nota do aluno(a): {cont}")
-            not1 = float(input("digite a 1º nota: "))
-            not2 = float(input("digite a 2º nota: "))
-            not3 = float(input("digite a 3º nota: "))
-            not4 = float(input("digite a 4º nota: "))
+        else:
+            print("Aluno não encontrado!")
+
+            for i in range(1):
+                linha = []
+
+                for j in range(4):
+                    valor = float(input(f"Digite a nota do aluno {i+1}: "))
+                    linha.append(valor)
+
+                notas.append(linha)
+
+            for i in range(len(notas)):
+                soma = 0
+
+                for j in range(4):
+                    soma += notas[i][j]
+
+                    media = soma / 4
+                    print(f"Média: {media}")
 
     except:
         print("kfas")
